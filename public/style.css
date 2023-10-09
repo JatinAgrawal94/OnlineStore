@@ -1,0 +1,88 @@
+html,
+body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Poppins', 'Trebuchet MS', sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #eceff3;
+    overflow: hidden;
+}
+
+#entrance {
+    position: relative;
+    width: 700px;
+    height: 550px;
+    background: #fff;
+    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    border-radius: 10px;
+}
+
+#entrance h1 {
+    color: #5d728f;
+}
+
+.Form {
+    width: 700px;
+    height: 550px;
+    position: absolute;
+    transition: transform 0.6s ease-in-out;
+    text-align: center;
+}
+
+.Form input {
+    width: 80%;
+    height: 35px;
+    margin-bottom: 15px;
+    padding: 0 0 0 15px;
+}
+
+#LoginForm {
+    padding-top: 120px;
+    transform: translateX(0);
+}
+
+#SignupForm {
+    padding-top: 15px;
+    transform: translateX(100%);
+}
+
+.switch-animation {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.switch-animation a {
+    color: #8ea3c0;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.2s;
+}
+
+.switch-animation a:hover {
+    color: #5d728f;
+}
+
+button {
+    display: block;
+    margin: 2% auto 0;
+    border: none;
+    background: #8ea3c0;
+    padding: 10px 175px;
+    color: #fff;
+    text-transform: uppercase;
+    font-size: 18px;
+    border-radius: 5px;
+    font-weight: 700;
+    transition: background 0.2s;
+}
+
+button:hover {
+    background: #5d728f;
+}
