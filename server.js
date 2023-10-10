@@ -55,15 +55,16 @@ app.post('/loginuser',(req,res)=>{
     })
 })
 
+// placeholders are being used in the code for sql injection attacks
 app.post("/signupuser",(req,res)=>{
     var data=req.body;
     const query="INSERT INTO USER (USERNAME,EMAIL,PASSWORD,FIRSTNAME,LASTNAME) VALUES (?,?,?,?,?)";
     con.query(query, [data.username, data.email, data.password, data.fname, data.lname],(err,result)=>{
         if(err){
-            console.log(err.sqlMessage)
+            // console.log(err.sqlMessage)
             res.send(err.sqlMessage);
         }else{
-            res.send("Row Added Successfully")
+            res.send("SignUp Successful")
         }
     })
 })
