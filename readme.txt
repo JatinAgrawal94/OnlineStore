@@ -13,6 +13,7 @@ Contributions: Development of Frontend using HTML/CSS
 
 Rajkumar Lakoji
 Student Id: 203144857
+Section2
 Contributions: Setting up DB and respective requirements
 
 Phase 1 Video: https://drive.google.com/file/d/1x00Ah3AGtvOfmtDxRy0CJpDDLPhEH4rf/view?usp=sharing
