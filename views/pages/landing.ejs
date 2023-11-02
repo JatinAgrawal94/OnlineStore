@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Product List</title>
+    <link rel="stylesheet" href="landing.css">
+    <link rel="icon" type="image/x-icon" href="./favicon.png">
+
+</head>
+
+<body>
+    <div id="top-container">
+        <header>
+            <div class="header-left main-header">
+                
+                <input type="text" name="" id="category-suggestions-input" list="category-suggestions" placeholder="Category">
+                <datalist id="category-suggestions">
+                    <%categories.map((c)=>{%>
+                    <option class="category_options" value=<%=c%>>
+                    <%})%>
+                </datalist>
+
+                <button id="add-item-button">Add Item</button>
+            </div>
+            <div class="header-center main-header">
+                <h1>Product List</h1>
+            </div>
+            <div class="header-right main-header">
+                <button id="init-button">Initialize</button>
+                <button id="logout-button">Logout</button>
+            </div>
+        </header>
+        <table id="product-list">
+            <!-- <tr>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Price</th>
+                <th>Posted By</th>
+                <th>Posted On</th>
+                <th>Review</th>
+            </tr> -->
+        </table>
+        
+    </div>
+
+    <div id="bottom-container">
+        <header>
+            <div class="header-center main-header">
+                <h1>Search Tools</h1>
+            </div>
+        </header>
+        <div id="button-grid">
+            <button>Most Expensive Category Items</button>
+            <button>User Posted Twice, Category X & Y</button>
+            <button>Items From X, Excellent & Good</button>
+            <button>Users That Posted Most on 2023/10/18</button>
+            <button>Users Favorited by X & Y</button>
+            <button>Excellent Items (3+ Excellent)</button>
+            <button>Users That Rated Nothing "Poor"</button>
+            <button>Users That Only Rate "Poor"</button>
+            <button>Users That Have No "Poor" Rated Items</button>
+            <button>Users That Gave Each Other "Excellent"</button>
+        </div>
+    </div>
+
+    <div id="results-modal" class="modal">
+        <div class="modal-content search-modals">
+            <span class="close">&times;</span>
+            <h2>Results</h2>
+            <p>Temporary Result</p>
+        </div>
+    </div>
+
+    <div id="modal-1" class="modal">
+        <div class="modal-content search-modals">
+            <span class="close">&times;</span>
+            <h2>Most Expensive Items Per Category</h2>
+            <button id="submit-modal-1">Submit</button>
+        </div>
+    </div>
+    
+    <div id="modal-2" class="modal">
+        <div class="modal-content search-modals">
+            <span class="close">&times;</span>
+            <h2>Users Who Posted At Least 2 Items On The Same Day, One From The First Category Below and One From The Second Category</h2>
+            <select id="category-1">
+                <option value="Electronics">ELECTRONICS</option>
+                <option value="Appliances">APPLIANCES</option>
+                <option value="Furniture">FURNITURE</option>
+                <option value="Beauty">BEAUTY</option>
+                <option value="Toys">TOYS</option>
+            </select>
+            <select id="category-2">
+                <option value="Electronics">ELECTRONICS</option>
+                <option value="Appliances">APPLIANCES</option>
+                <option value="Furniture">FURNITURE</option>
+                <option value="Beauty">BEAUTY</option>
+                <option value="Toys">TOYS</option>
+            </select>
+            <button id="submit-modal-2">Submit</button>
+        </div>
+    </div>
+
+    <div id="modal-3" class="modal">
+        <div class="modal-content search-modals">
+            <span class="close">&times;</span>
+            <h2>Items Posted By The User Below That All Received Either "Excellent" Or "Good" Reviews</h2>
+            <input type="text" placeholder="Enter Username">
+            <button id="submit-modal-3">Submit</button>
+        </div>
+    </div>
+
+    <div id="modal-4" class="modal">
+        <div class="modal-content search-modals">
+            <span class="close">&times;</span>
+            <h2>Users That Posted The Most Items On 2023/10/18</h2>
+            <button id="submit-modal-4">Submit</button>
+        </div>
+    </div>
+
+    <div id="modal-5" class="modal">
+        <div class="modal-content search-modals">
+            <span class="close">&times;</span>
+            <h2>Users Favorited By Both Users Below</h2>
+            <input type="text" placeholder="Enter Username">
+            <input type="text" placeholder="Enter Username">
+            <button id="submit-modal-5">Submit</button>
+        </div>
+    </div>
+
+    <div id="modal-6" class="modal">
+        <div class="modal-content search-modals">
+            <span class="close">&times;</span>
+            <h2>Users That Listed Excellent Items (3+ Excellent Reviews)</h2>
+            <button id="submit-modal-6">Submit</button>
+        </div>
+    </div>
+
+    <div id="modal-7" class="modal">
+        <div class="modal-content search-modals">
+            <span class="close">&times;</span>
+            <h2>Users That Have Never Posted A Poor Review</h2>
+            <button id="submit-modal-7">Submit</button>
+        </div>
+    </div>
+
+    <div id="modal-8" class="modal">
+        <div class="modal-content search-modals">
+            <span class="close">&times;</span>
+            <h2>Users That Only Post Poor Reviews</h2>
+            <button id="submit-modal-8">Submit</button>
+        </div>
+    </div>
+
+    <div id="modal-9" class="modal">
+        <div class="modal-content search-modals">
+            <span class="close">&times;</span>
+            <h2>Users That Have Listed Items, But Have Received No Poor Reviews</h2>
+            <button id="submit-modal-9">Submit</button>
+        </div>
+    </div>
+
+    <div id="modal-10" class="modal">
+        <div class="modal-content search-modals">
+            <span class="close">&times;</span>
+            <h2>Users A & B Such That They Have Always Given Each Other "Excellent" For Each Listed Item</h2>
+            <button id="submit-modal-10">Submit</button>
+        </div>
+    </div>
+
+    <div id="add-item-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Add New Item</h2>
+            <form id="add-item-form" onsubmit="return insertProducttoDB()">
+                <div class="input-group">
+                    <input type="text" id="new-item-title" placeholder="Title" required>
+                    <input type="number" step="0.01" id="new-item-price" placeholder="Price" required>
+                </div>
+                <textarea id="new-item-description" placeholder="Description" required></textarea>
+                <textarea name="" placeholder="Category" id="new-item-category" cols="30" rows="1" required></textarea>
+                <button >Add Item</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="add-review-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Add Review</h2>
+            <select id="review-rating">
+                <option value="Excellent">Excellent</option>
+                <option value="Good">Good</option>
+                <option value="Fair">Fair</option>
+                <option value="Poor">Poor</option>
+            </select>
+            <textarea id="review-text" placeholder="Write your review here..."></textarea>
+            <button id="save-review-button">Save Review</button>
+        </div>
+    </div>
+
+    <div id="show-reviews-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Reviews</h2>
+            <div id="review-list"></div>
+        </div>
+    </div>
+
+    <script src="landing.js"></script>
+    <script>
+        function jatin(){
+            console.log("This is fucked up.")
+        }
+    </script>
+</body>
+</html>

@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <title>Home</title>
     <link rel="stylesheet" href="./style.css">
+    <link rel="icon" type="image/x-icon" href="./favicon.png">
 </head>
 
 <body>
@@ -79,10 +80,10 @@
         function Loginfunction(data,e){
             var xhttp=new XMLHttpRequest();
             if(e){
-                xhttp.open("POST", "/loginuser");
+                xhttp.open("POST", "/auth/login");
             }
             else{
-                xhttp.open("POST", "/signupuser");
+                xhttp.open("POST", "/auth/signup");
             }
             xhttp.setRequestHeader("Content-type", "application/json");
             xhttp.onload = function() {
@@ -91,7 +92,8 @@
                 }else if(this.responseText.search('EMAIL')!==-1){
                     alert("Email already in use !")
                 }else if(this.responseText.search("Successful")!==-1){
-                    alert("Login Successful");
+                   localStorage.setItem('username',data.username);
+                    window.location.replace('/product')
                 }else if(this.responseText.search("Failed")!==-1){
                     alert("Username or Password Incorrect");
                 }
