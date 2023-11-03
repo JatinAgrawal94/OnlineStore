@@ -55,7 +55,6 @@ const addReview=(db,data)=>{
     const query="SELECT * FROM PRODUCT WHERE PRODUCTID=? AND USERNAME=?"
     let date=new Date();
     date=`${date.getFullYear()}/${date.getMonth()+1}/${date.getDate()}`;
-    
     const query1="Select Count(REVIEWID) FROM REVIEW WHERE USERNAME=? AND REVIEW_DATE=?"
     const query2="INSERT INTO REVIEW (PRODUCTID, USERNAME, REVIEW_DATE,REVIEW_TYPE,REVIEW_DESC) VALUES (?,?,?,?,?)"
 
@@ -68,22 +67,20 @@ const addReview=(db,data)=>{
             }else{
                 db.query(query1,[data.username,date],(err,result)=>{
                     result=JSON.parse(JSON.stringify(result))
+                    result=result[0]['Count(REVIEWID)']
                     if(err) reject({response:err.sqlMessage})
-                    else if(result.length<3){
+                    else if(result<3){
                         db.query(query2,[data.productid,data.username,date,data.type,data.description],(err,result)=>{
                             resolve({resposne:"100"})
                         })
-                    }else if(result.length >=3){
+                    }else if(result>=3){
                         reject({response:"102"})
                     }   
                 })
             }
         })
     }).catch((err)=>{
-        console.log(err)
     })
-
-
 }
 
 // insert into review where username="" and 
@@ -103,8 +100,9 @@ const getAllReviews=(db,productid)=>{
 }
 
 const initializeDB=(db)=>{
+    const q0="DROP TABLES USER, PRODUCT,REVIEW;"
     // create user table
-    const q1="CREATE TABLE USER (USERNAME VARCHAR(255),EMAIL VARCHAR(255) NOT NULL,PASSWORD VARCHAR(255) NOT NULL,FIRSTNAME VARCHAR(255) NOT NULL,LASTNAME VARCHAR(255) NOT NULL,PRIMARY KEY(USERNAME))";
+    const q1="CREATE TABLE USER (USERNAME VARCHAR(255),EMAIL VARCHAR(255) UNIQUE NOT NULL,PASSWORD VARCHAR(255) NOT NULL,FIRSTNAME VARCHAR(255) NOT NULL,LASTNAME VARCHAR(255) NOT NULL,PRIMARY KEY(USERNAME))";
     // create product table
     const q2="CREATE TABLE PRODUCT (PRODUCTID INT AUTO_INCREMENT, TITLE VARCHAR(255) NOT NULL,DESCRIPTION VARCHAR(255) NOT NULL,CATEGORY VARCHAR(255) NOT NULL,PRICE DECIMAL(7,2) NOT NULL,USERNAME VARCHAR(255),DATE DATE NOT NULL,FOREIGN KEY(USERNAME) REFERENCES USER(USERNAME), PRIMARY KEY(PRODUCTID))";
     // create review table
@@ -114,6 +112,11 @@ const initializeDB=(db)=>{
     var i2="INSERT INTO PRODUCT (USERNAME,TITLE,DESCRIPTION,CATEGORY,PRICE,DATE) VALUES ?";
     var i3="INSERT INTO REVIEW (USERNAME,PRODUCTID,REVIEW_DATE,REVIEW_TYPE,REVIEW_DESC) VALUES ?";
     try {    
+
+        db.query(q0,(err,result)=>{
+            if(err){console.log(err)}
+            else{console.log("ALL TABLES DROPPED.")}
+        })
         db.query(q1,(err,result)=>{
             if(err){console.log(err)}
             else{console.log("USER TABLE CREATED")};

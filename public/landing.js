@@ -39,7 +39,6 @@ close_buttons.forEach((closeButton) => {
 
 // Update page to display products passed to it.
 function display_products(products) {
-
     const product_list = document.getElementById('product-list');
     product_list.innerHTML = "";
     if(products.length==0){
@@ -122,8 +121,6 @@ function open_show_reviews_modal(data) {
     const reviews_list = document.getElementById('review-list');
     reviews_list.innerHTML = '';
     // get reviews
-    const product = products.find(p => p.product_id === product_id);
-    
     if (data.length!==0) {
         data.forEach(review => {
             const review_div = document.createElement('div');
@@ -135,7 +132,6 @@ function open_show_reviews_modal(data) {
     } else {
         reviews_list.textContent = 'None';
     }
-    
     modal.style.display = "block";
 }
 
