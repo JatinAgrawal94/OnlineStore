@@ -9,7 +9,6 @@ reviewRouter.post('/add',async(req,res)=>{
         var result=await addReview(req.db,data)
         res.send(result);
     } catch (error) {
-        console.error(error);
         res.status(400).json({"response":error})
     }
 })

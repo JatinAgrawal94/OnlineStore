@@ -51,7 +51,7 @@ function display_products(products) {
         const tr = document.createElement('tr');
         tr.innerHTML = `
         <th>TITLE</th>
-        <th>DESCRIPTION}</th>
+        <th>DESCRIPTION</th>
         <th>PRICE</th>
         <th>Posted By</th>
         <th>Date</th>
@@ -59,7 +59,6 @@ function display_products(products) {
         product_list.appendChild(tr);
         
         products.forEach(product => {
-            console.log(product.PRODUCTID)
             const product_div = document.createElement('tr');
         product_div.innerHTML = `
             <th>${product.TITLE}</th>
@@ -68,10 +67,11 @@ function display_products(products) {
             <th>${product.USERNAME}</th>
             <th>${product.DATE.split('T')[0]}</th>
             <th><div class="button-container">
-                <button class="review-button" data-productid=${product.PRODUCTID} onclick="open_add_review_modal()">Add</button>
-                <button class="review-button" data-productid=${product.PRODUCTID} onclick="getAllReviews(${product.PRODUCTID})">Show</button>
+                <button class="review-button" onclick="open_add_review_modal(${product.PRODUCTID})">Add</button>
+                <button class="review-button" onclick="getAllReviews(${product.PRODUCTID})">Show</button>
             </div></th>      
             `;
+
             product_list.appendChild(product_div);
         });
     }
@@ -111,6 +111,7 @@ function insertProducttoDB(){
 // Open the add-review modal.
 function open_add_review_modal(productId) {
     const modal = document.getElementById('add-review-modal');
+    modal.dataset.productid=productId;
     modal.style.display = "block";
 }
 
@@ -143,8 +144,8 @@ function open_show_reviews_modal(data) {
 function save_review() {
     const rating = document.getElementById('review-rating').value;
     const review_text = document.getElementById('review-text').value;
-    var productid=document.querySelectorAll('.review-button')[0]
-    productid=productid.getAttribute('data-productid')
+    const modal = document.getElementById('add-review-modal');
+    let productid=modal.dataset.productid;
     const review = {
         type: rating,
         description: review_text,
@@ -158,7 +159,6 @@ function save_review() {
         }
    
     xhttp.send(JSON.stringify(review))
-    
 }
 
 function getAllReviews(productid){
@@ -229,4 +229,18 @@ function getProductsAccToCategory(filter){
 
 document.addEventListener('DOMContentLoaded',()=>{
     getProductsAccToCategory("");
+})
+
+
+document.getElementById('init-button').addEventListener("click",(e)=>{
+    e.preventDefault();
+    var xhttp = new XMLHttpRequest();
+    xhttp.open("POST",`/auth/initialize`, true);
+    xhttp.setRequestHeader('Content-type',"application/json")
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            let result=(xhttp.responseText);
+        }
+    };
+    xhttp.send()
 })

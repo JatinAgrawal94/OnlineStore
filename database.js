@@ -1,3 +1,5 @@
+const {userData,productData,reviewData}=require('./dataarray')
+
 const getProductForCategory=(db,category)=>{
     const query="SELECT * FROM PRODUCT WHERE CATEGORY LIKE ?";
     return new Promise((resolve,reject)=>{
@@ -100,7 +102,49 @@ const getAllReviews=(db,productid)=>{
 
 }
 
+const initializeDB=(db)=>{
+    // create user table
+    const q1="CREATE TABLE USER (USERNAME VARCHAR(255),EMAIL VARCHAR(255) NOT NULL,PASSWORD VARCHAR(255) NOT NULL,FIRSTNAME VARCHAR(255) NOT NULL,LASTNAME VARCHAR(255) NOT NULL,PRIMARY KEY(USERNAME))";
+    // create product table
+    const q2="CREATE TABLE PRODUCT (PRODUCTID INT AUTO_INCREMENT, TITLE VARCHAR(255) NOT NULL,DESCRIPTION VARCHAR(255) NOT NULL,CATEGORY VARCHAR(255) NOT NULL,PRICE DECIMAL(7,2) NOT NULL,USERNAME VARCHAR(255),DATE DATE NOT NULL,FOREIGN KEY(USERNAME) REFERENCES USER(USERNAME), PRIMARY KEY(PRODUCTID))";
+    // create review table
+    const q3="CREATE TABLE REVIEW (REVIEWID INT AUTO_INCREMENT,PRODUCTID INT, USERNAME VARCHAR(255), REVIEW_DATE DATE NOT NULL, REVIEW_TYPE VARCHAR(255) NOT NULL, REVIEW_DESC VARCHAR(255) NOT NULL,FOREIGN KEY(PRODUCTID) REFERENCES PRODUCT(PRODUCTID),FOREIGN KEY(USERNAME) REFERENCES USER(USERNAME),PRIMARY KEY(REVIEWID))"
+    //insertion of records
+    var i1="INSERT INTO USER (USERNAME, EMAIL, PASSWORD, FIRSTNAME, LASTNAME) VALUES ?";
+    var i2="INSERT INTO PRODUCT (USERNAME,TITLE,DESCRIPTION,CATEGORY,PRICE,DATE) VALUES ?";
+    var i3="INSERT INTO REVIEW (USERNAME,PRODUCTID,REVIEW_DATE,REVIEW_TYPE,REVIEW_DESC) VALUES ?";
+    try {    
+        db.query(q1,(err,result)=>{
+            if(err){console.log(err)}
+            else{console.log("USER TABLE CREATED")};
+        })
+        db.query(q2,(err,result)=>{
+            if(err){console.log(err)}
+            else{console.log("PRODUCT TABLE CREATED")};
+        })
+        db.query(q3,(err,result)=>{
+            if(err){console.log(err)}
+            else{console.log("REVIEW TABLE CREATED")};
+        })
 
+        db.query(i1,[userData],(err,result)=>{
+            if(err){console.log(err)}
+            else{console.log("USER'S CREATED")};
+        })
+        db.query(i2,[productData],(err,result)=>{
+            if(err){console.log(err)}
+            else{console.log("PRODUCT'S ADDED")};
+        })
+        db.query(i3,[reviewData],(err,result)=>{
+            if(err){console.log(err)}
+            else{console.log("REVIEW'S ADDED")};
+        })
 
-module.exports={CreateProduct,addReview,getAllProducts,getAllReviews,getProductForCategory,getAllReviews}
+    } catch (error) {
+        console.log(error);
+    }
+    
+}
+
+module.exports={CreateProduct,addReview,getAllProducts,getAllReviews,getProductForCategory,getAllReviews,initializeDB}
 
