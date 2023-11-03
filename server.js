@@ -5,7 +5,7 @@ require('dotenv').config();
 const productRouter=require('./router/product')
 const authRouter=require('./router/authenticate')
 const reviewRouter=require('./router/review')
-
+const cors=require('cors')
 app.use(express.static(__dirname + '/public'));
 app.set('view engine','ejs')
 app.use(express.json())
@@ -31,7 +31,7 @@ con.connect(function(err) {
 //         console.log("Table Created");
 //     })};
 // above code snipped was only supposed to be used once to create a table.
-
+app.use(cors())
 app.get('/',(req,res)=>{
     res.render('pages/index')
 })

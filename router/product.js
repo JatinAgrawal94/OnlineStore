@@ -7,10 +7,8 @@ const productRouter=express();
 // insert product
 productRouter.get('/',async(req,res)=>{
     var products=await getAllProducts(req.db);
-    
     var categories=[]
     if(products.length!==0){
-
         for(let i=0;i<products.length;i++){
             categories=categories.concat(products[i].CATEGORY.split(','))
         }

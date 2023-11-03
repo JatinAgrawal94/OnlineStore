@@ -49,20 +49,58 @@ const getAllProducts =(db)=>{
     }))
 }
 
-const addReview=(db,productid, username)=>{
-    const query1="Select Count(REVIEWID) FROM REVIEW WHERE USERNAME="
-    const query2="INSERT INTO REVIEW (PRODUCTID, USERNAME, REVIEWDATE,REVIEW_TYPE,REVIEW_DESC) VALUES (?,?,?,?,?)"
-    con.query(query2,[data.productid,data.username, data.date,data.type,data.description],(err,result)=>{
-        if(err) return (err.sqlMessage)
-        else return"Review Added"
+const addReview=(db,data)=>{
+    const query="SELECT * FROM PRODUCT WHERE PRODUCTID=? AND USERNAME=?"
+    let date=new Date();
+    date=`${date.getFullYear()}/${date.getMonth()+1}/${date.getDate()}`;
+    
+    const query1="Select Count(REVIEWID) FROM REVIEW WHERE USERNAME=? AND REVIEW_DATE=?"
+    const query2="INSERT INTO REVIEW (PRODUCTID, USERNAME, REVIEW_DATE,REVIEW_TYPE,REVIEW_DESC) VALUES (?,?,?,?,?)"
+
+    return new Promise((resolve,reject)=>{
+        db.query(query,[data.productid,data.username],(err,result)=>{
+            result=JSON.parse(JSON.stringify(result))
+            if(err) {reject({response:err.sqlMessage})}
+            else if(result.length!==0){
+                reject("101")
+            }else{
+                db.query(query1,[data.username,date],(err,result)=>{
+                    result=JSON.parse(JSON.stringify(result))
+                    if(err) reject({response:err.sqlMessage})
+                    else if(result.length<3){
+                        db.query(query2,[data.productid,data.username,date,data.type,data.description],(err,result)=>{
+                            resolve({resposne:"100"})
+                        })
+                    }else if(result.length >=3){
+                        reject({response:"102"})
+                    }   
+                })
+            }
+        })
+    }).catch((err)=>{
+        console.log(err)
     })
+
+
+}
+
+// insert into review where username="" and 
+
+const getAllReviews=(db,productid)=>{
+    const query="SELECT * FROM REVIEW WHERE PRODUCTID=?"
+    return new Promise((resolve,reject)=>{
+        db.query(query,[productid],(err,result)=>{
+            result=JSON.parse(JSON.stringify(result))
+            if(err) reject(err.sqlMessage)
+            else{
+                resolve(result)
+            }
+        })
+    })
+
 }
 
 
 
-const getAllReviews=(db,productid)=>{}
-
-
-
-module.exports={CreateProduct,addReview,getAllProducts,getAllReviews,getProductForCategory}
+module.exports={CreateProduct,addReview,getAllProducts,getAllReviews,getProductForCategory,getAllReviews}
 

@@ -18,4 +18,3 @@ Contributions: Setting up DB and respective requirements
 
 Phase 1 Video: https://drive.google.com/file/d/1x00Ah3AGtvOfmtDxRy0CJpDDLPhEH4rf/view?usp=sharing
 Note: All the contributions listed are being done for a particular phase.
-

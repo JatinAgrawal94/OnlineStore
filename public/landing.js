@@ -5,12 +5,6 @@ let product_id = 0;
 let user_id = 1;
 
 document.getElementById('add-item-button').addEventListener('click', open_add_item_modal);
-document.getElementById('save-review-button').addEventListener('click', function() {
-    const product_id = document.getElementById('add-review-modal').dataset.product_id;
-    save_review(Number(product_id));
-});
-
-
 
 // Open results.
 function open_results_modal() {
@@ -65,9 +59,8 @@ function display_products(products) {
         product_list.appendChild(tr);
         
         products.forEach(product => {
+            console.log(product.PRODUCTID)
             const product_div = document.createElement('tr');
-            // Change this to get the Username from the database with the user_id. Display the username instead of ID.
-            // Also, check the database if the user has already favorited a seller/item or not. If so, change Favorite to Unfavorite dynamically.
         product_div.innerHTML = `
             <th>${product.TITLE}</th>
             <th>${product.DESCRIPTION}</th>
@@ -75,8 +68,8 @@ function display_products(products) {
             <th>${product.USERNAME}</th>
             <th>${product.DATE.split('T')[0]}</th>
             <th><div class="button-container">
-                <button onclick="open_add_review_modal(${product.PRODUCTID})">Add</button>
-                <button onclick="open_show_reviews_modal(${product.PRODUCTID})">Show</button>
+                <button class="review-button" data-productid=${product.PRODUCTID} onclick="open_add_review_modal()">Add</button>
+                <button class="review-button" data-productid=${product.PRODUCTID} onclick="getAllReviews(${product.PRODUCTID})">Show</button>
             </div></th>      
             `;
             product_list.appendChild(product_div);
@@ -88,8 +81,6 @@ function display_products(products) {
 // FUNCTION TO ADD NEW ITEMS.
 function open_add_item_modal() {
     const modal = document.getElementById('add-item-modal');
-    let button=modal.getElementsByTagName('button')[0];
-    let form=document.getElementById('add-item-form')
     modal.style.display = "block";
 }
 
@@ -117,40 +108,27 @@ function insertProducttoDB(){
 }
 
 
-
 // Open the add-review modal.
-function open_add_review_modal() {
-    // console.log("Hello ji")
+function open_add_review_modal(productId) {
     const modal = document.getElementById('add-review-modal');
-    modal.dataset.product_id = 1;
     modal.style.display = "block";
 }
-const addreview= document.getElementById('addreview')
-const showreview=document.getElementById('showreview')
-// addreview.addEventListener("click",(e)=>{
-//     open_add_review_modal(addreview.getAttribute('data-productid'))
-// })
 
-// showreview.addEventListener("click",(e)=>{
-//     open_show_reviews_modal(showreview.getAttribute('data-productid'))
-// })
 
 // Open the reviews modal.
-function open_show_reviews_modal(product_id) {
+function open_show_reviews_modal(data) {
     const modal = document.getElementById('show-reviews-modal');
-    modal.dataset.product_id = product_id
     const reviews_list = document.getElementById('review-list');
     reviews_list.innerHTML = '';
+    // get reviews
     const product = products.find(p => p.product_id === product_id);
     
-    if (product && product.reviews && product.reviews.length > 0) {
-        product.reviews.forEach(review => {
+    if (data.length!==0) {
+        data.forEach(review => {
             const review_div = document.createElement('div');
-            // Change this to get the Username from the database with the user_id. Display the username instead of ID.
-            // So instead of "User 1" it should say something like "jatin0810"
+            review_div.setAttribute('class','review-tile');
             review_div.innerHTML = `
-                <button onclick="remove_review(${review.user_id}, ${product_id})">X</button> User ${review.user_id}: ${review.rating}${review.review_text ? ', ' + review.review_text : ''}
-            `;
+            <p> ${review.USERNAME}</p><p>Rating: ${review.REVIEW_TYPE}</p><p>Date:${review.REVIEW_DATE.split('T')[0]}</p><p>${review.REVIEW_DESC}</p>`;
             reviews_list.appendChild(review_div);
         });
     } else {
@@ -160,19 +138,40 @@ function open_show_reviews_modal(product_id) {
     modal.style.display = "block";
 }
 
+
 // Save a new review.
-function save_review(product_id) {
+function save_review() {
     const rating = document.getElementById('review-rating').value;
     const review_text = document.getElementById('review-text').value;
-    //  Make sure the user_id it saves is the one of the currently authorized user. Currently, it uses the number 1 as a test user.
+    var productid=document.querySelectorAll('.review-button')[0]
+    productid=productid.getAttribute('data-productid')
     const review = {
-        user_id: user_id,
-        rating: rating,
-        review_text: review_text
+        type: rating,
+        description: review_text,
+        username:localStorage.getItem('username'),
+        productid:productid
     };
-    const product = products.find(p => p.product_id === product_id);
-    product.reviews.push(review);
-    close_all_modals();
+    var xhttp = new XMLHttpRequest();
+    xhttp.open("POST",`/product/review/add`, true);
+    xhttp.setRequestHeader('Content-type',"application/json")
+    xhttp.onreadystatechange = function() {
+        }
+   
+    xhttp.send(JSON.stringify(review))
+    
+}
+
+function getAllReviews(productid){
+    var xhttp = new XMLHttpRequest();
+    xhttp.open("GET",`/product/review/all/${productid}`, true);
+    xhttp.setRequestHeader('Content-type',"application/json")
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            let result=JSON.parse(xhttp.responseText);
+            open_show_reviews_modal(result)
+        }
+    };
+    xhttp.send()
 }
 
 function remove_review(user_id, product_id) {
@@ -205,12 +204,6 @@ document.getElementById('logout-button').addEventListener('click',(e)=>{
 })
 
 suggestion=document.getElementById("category-suggestions-input")
-
-// suggestion.addEventListener('load',(e)=>{
-//     console.log(e.target.value)
-//     getProductsAccToCategory(e.target.value)
-// })
-
 suggestion.addEventListener('input',(e)=>{
     getProductsAccToCategory(e.target.value)
 })

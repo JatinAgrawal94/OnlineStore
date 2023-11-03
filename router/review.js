@@ -1,14 +1,29 @@
-let express=require('express')
+let express=require('express');
+const { addReview, getAllReviews } = require('../database');
 let reviewRouter=express()
 
 // functions getallreview, addnewreview, 
-reviewRouter.post('/add',(req,res)=>{
-    let data=req.body;
-    const query2="INSERT INTO REVIEW (PRODUCTID, USERNAME, REVIEWDATE,REVIEW_TYPE,REVIEW_DESC) VALUES (?,?,?,?,?)"
-    con.query(query2,[data.productid,data.username, data.date,data.type,data.description],(err,result)=>{
-        if(err) res.send(err.sqlMessage)
-        else res.send({response:"Review Added"})
-    })
+reviewRouter.post('/add',async(req,res)=>{
+    try {
+        let data=req.body;
+        var result=await addReview(req.db,data)
+        res.send(result);
+    } catch (error) {
+        console.error(error);
+        res.status(400).json({"response":error})
+    }
 })
+
+
+reviewRouter.get('/all/:id',async(req,res)=>{
+    try {    
+        let param=req.params.id;
+        let result=await getAllReviews(req.db,param)
+        res.send(result);
+    } catch (error) {
+        res.send(error);
+    }
+})
+
 
 module.exports=reviewRouter;

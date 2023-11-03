@@ -31,16 +31,7 @@
                 <button id="logout-button">Logout</button>
             </div>
         </header>
-        <table id="product-list">
-            <!-- <tr>
-                <th>Title</th>
-                <th>Description</th>
-                <th>Price</th>
-                <th>Posted By</th>
-                <th>Posted On</th>
-                <th>Review</th>
-            </tr> -->
-        </table>
+        <table id="product-list"></table>
         
     </div>
 
@@ -189,14 +180,16 @@
         <div class="modal-content">
             <span class="close">&times;</span>
             <h2>Add Review</h2>
-            <select id="review-rating">
-                <option value="Excellent">Excellent</option>
-                <option value="Good">Good</option>
-                <option value="Fair">Fair</option>
-                <option value="Poor">Poor</option>
-            </select>
-            <textarea id="review-text" placeholder="Write your review here..."></textarea>
-            <button id="save-review-button">Save Review</button>
+            <form onsubmit="return save_review()">
+                <select id="review-rating" required>
+                    <option value="Excellent">Excellent</option>
+                    <option value="Good">Good</option>
+                    <option value="Fair">Fair</option>
+                    <option value="Poor">Poor</option>
+                </select>
+                <textarea id="review-text" placeholder="Write your review here..." required></textarea>
+                <button id="save-review-button">Save Review</button>
+            </form>
         </div>
     </div>
 
@@ -209,10 +202,7 @@
     </div>
 
     <script src="landing.js"></script>
-    <script>
-        function jatin(){
-            console.log("This is fucked up.")
-        }
-    </script>
 </body>
 </html>
+
+
