@@ -99,8 +99,42 @@ const getAllReviews=(db,productid)=>{
 
 }
 
-const initializeDB=(db)=>{
-    const q0="DROP TABLES USER, PRODUCT,REVIEW;"
+const checkforDB=async(db)=>{
+    // assuming db is created check for tables,
+    const q="SHOW TABLES";
+    return new Promise((resolve,reject)=>{
+        db.query(q,(err,result)=>{
+            if(err){reject(err)}
+            else{
+                result=JSON.parse(JSON.stringify(result))
+                var count=0;
+                for(let i=0;i<result.length;i++){
+                    if(result[i]['Tables_in_ONLINESTORE']==='PRODUCT' || result[i]['Tables_in_ONLINESTORE']==='USER' || result[i]['Tables_in_ONLINESTORE']==='REVIEW'){
+                        count=count+1
+                    }
+                }
+                if(count===3){
+                    resolve(true)
+                }else{
+                    resolve(false)
+                }
+            }
+        })
+    })
+}
+
+const initializeDB=async(db)=>{ 
+    // if the tables are there drop them
+    const result=await checkforDB(db)
+    if(result==true){
+        console.log(result)
+        const q0="DROP TABLES USER, PRODUCT,REVIEW;"
+        await db.query(q0,(err,result)=>{
+            if(err){console.log(err)}
+            else{console.log("ALL TABLES DROPPED.")}
+        })
+    }
+    
     // create user table
     const q1="CREATE TABLE USER (USERNAME VARCHAR(255),EMAIL VARCHAR(255) UNIQUE NOT NULL,PASSWORD VARCHAR(255) NOT NULL,FIRSTNAME VARCHAR(255) NOT NULL,LASTNAME VARCHAR(255) NOT NULL,PRIMARY KEY(USERNAME))";
     // create product table
@@ -111,43 +145,38 @@ const initializeDB=(db)=>{
     var i1="INSERT INTO USER (USERNAME, EMAIL, PASSWORD, FIRSTNAME, LASTNAME) VALUES ?";
     var i2="INSERT INTO PRODUCT (USERNAME,TITLE,DESCRIPTION,CATEGORY,PRICE,DATE) VALUES ?";
     var i3="INSERT INTO REVIEW (USERNAME,PRODUCTID,REVIEW_DATE,REVIEW_TYPE,REVIEW_DESC) VALUES ?";
-    try {    
-
-        db.query(q0,(err,result)=>{
-            if(err){console.log(err)}
-            else{console.log("ALL TABLES DROPPED.")}
-        })
-        db.query(q1,(err,result)=>{
+    try {   
+        await db.query(q1,(err,result)=>{
             if(err){console.log(err)}
             else{console.log("USER TABLE CREATED")};
         })
-        db.query(q2,(err,result)=>{
+       await  db.query(q2,(err,result)=>{
             if(err){console.log(err)}
             else{console.log("PRODUCT TABLE CREATED")};
         })
-        db.query(q3,(err,result)=>{
+        await db.query(q3,(err,result)=>{
             if(err){console.log(err)}
             else{console.log("REVIEW TABLE CREATED")};
         })
 
-        db.query(i1,[userData],(err,result)=>{
+        await db.query(i1,[userData],(err,result)=>{
             if(err){console.log(err)}
             else{console.log("USER'S CREATED")};
         })
-        db.query(i2,[productData],(err,result)=>{
+        await db.query(i2,[productData],(err,result)=>{
             if(err){console.log(err)}
             else{console.log("PRODUCT'S ADDED")};
         })
-        db.query(i3,[reviewData],(err,result)=>{
+        await db.query(i3,[reviewData],(err,result)=>{
             if(err){console.log(err)}
             else{console.log("REVIEW'S ADDED")};
         })
-
+        return "success";
     } catch (error) {
         console.log(error);
     }
     
 }
 
-module.exports={CreateProduct,addReview,getAllProducts,getAllReviews,getProductForCategory,getAllReviews,initializeDB}
+module.exports={CreateProduct,addReview,getAllProducts,getAllReviews,getProductForCategory,getAllReviews,initializeDB,checkforDB}
 

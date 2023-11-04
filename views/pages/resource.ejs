@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Store</title>
+</head>
+<body>
+    <h1>There are no tables in the DB kindly click the below button to add tables to your created database.</h1>
+    <button onclick="initiateDatabase()">Initiate Database</button>
+    <script>
+        function initiateDatabase(){
+            var xhttp = new XMLHttpRequest();
+            xhttp.open("POST",`/auth/initialize`, true);
+            xhttp.setRequestHeader('Content-type',"application/json")
+            xhttp.onreadystatechange = function() {
+                console.log(xhttp.responseText)
+                console.log(this.status)
+                if (this.readyState == 4 && this.status == 200) {
+
+                 window.location.href='/'
+                }
+            };
+            xhttp.send()
+        }
+    </script>
+</body>
+</html>

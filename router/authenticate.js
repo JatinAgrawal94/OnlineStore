@@ -43,9 +43,10 @@ authRouter.post('/logout',(req,res)=>{
 authRouter.post('/initialize',async(req,res)=>{
     try {
         const result=await initializeDB(req.db);
-        console.log(`Result is ${result}`)
+        res.send("Success")
     } catch (error) {
         console.log(`Error is ${error}`);
+        res.send("Error")
     }
 })
 

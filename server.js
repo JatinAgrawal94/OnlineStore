@@ -5,7 +5,8 @@ require('dotenv').config();
 const productRouter=require('./router/product')
 const authRouter=require('./router/authenticate')
 const reviewRouter=require('./router/review')
-const cors=require('cors')
+const cors=require('cors');
+const { checkforDB } = require('./database');
 
 app.use(express.static(__dirname + '/public'));
 app.set('view engine','ejs')
@@ -27,8 +28,14 @@ con.connect(function(err) {
 
 app.use(cors())
 
-app.get('/',(req,res)=>{
-    res.render('pages/index')
+app.get('/',async(req,res)=>{
+    // check for if tables are created not. AND ALSO THE DB.
+    let result=await checkforDB(con)
+    if(result==false){
+        res.render('pages/resource')
+    }else{
+        res.render('pages/index')
+    }
 })
 
 // route to add a new review to a product
