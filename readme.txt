@@ -16,8 +16,8 @@ Student Id: 203144857
 Section2
 Contributions: Setting up DB and respective requirements, Establishing queries required to meet the goals.
 
-Phase 1 Video: 
-Phase 2 Video: 
+Phase 1 Video: https://youtu.be/sU4zqiFr5aU
+Phase 2 Video: https://youtu.be/209RHxeWZ3o?si=2lIo3V5YtfE_rUMP
 
 Tech Stack Used: HTML, CSS, Javascript, Node.js, MYSQL.
 Development System: Ubuntu Linux.
