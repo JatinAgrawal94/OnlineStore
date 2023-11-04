@@ -1,5 +1,5 @@
 Project Members
-Group Number 5
+Team Number 5
 
 Jatin Agrawal 
 Student Id: 203128971
