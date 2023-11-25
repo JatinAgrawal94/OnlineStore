@@ -1,1 +1,1 @@
-POST http://localhost:3000/auth/initialize
+GET http://localhost:3000/product/category/catxandy?cat1=Electronics&cat2=Laptop

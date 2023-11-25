@@ -1,0 +1,31 @@
+<!-- this file shows design of phase 3 req2 -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CatXandY</title>
+    <style>
+        html{
+            background-color: #eceff3;
+        }
+        table tr,th,td{
+            border:1px solid black;
+            padding: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <h1>Users Who Posted At Least 2 Items On The Same Day, One From The First Category Below and One From The Second Category</h1>
+        <table>
+            <tr><th>USER</th></tr>
+            <%users.map((u)=>{%>
+                <tr><th><%=u.USERNAME%></th></tr>
+            <%})%>
+        </table>
+    </div>
+</body>
+</html>
+

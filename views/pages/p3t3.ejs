@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Excellent And Good</title>
+    <link rel="icon" type="image/x-icon" href="./favicon.png">
+    <style>
+        html{
+            background-color: #eceff3;
+        }
+        table{
+            width: 100%;
+        }
+        table,th,tr{
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <h1>All the items posted by user X, such that all the comments are "Excellent" or "good" for
+            these items</h1>
+        <table>
+            <tr>
+                <th>TITLE</th>
+                <th>DESCRIPTION</th>
+                <th>PRICE</th>
+            </tr>
+            <%product.map((e)=>{%>
+                <tr>
+                    <th><%=e.TITLE%></th>
+                    <th><%=e.DESCRIPTION%></th>
+                    <th><%=e.PRICE%></th>
+                </tr>
+            <%})%>
+        </table>
+    </div>
+</body>
+</html>

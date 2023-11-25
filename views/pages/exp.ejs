@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Most Expensive Items</title>
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+    <link rel="icon" type="image/x-icon" href="./favicon.png">
+    <style>
+        html{
+            background-color: #eceff3;
+        }
+        #exp-table table{
+            width: 100%;
+        }
+        #exp-table table,th,tr,td{
+            border: 1px solid black;
+        }
+        #exp-table td{
+            background-color: grey;
+            font-weight: bold;
+            text-transform: capitalize;
+        }
+    </style>
+</head>
+<body>
+    <div id="exp-table">
+        <h1>Most Expensive Items in Each Category</h1>
+        <table>
+            <tr>
+                <!-- <th>Category</th> -->
+                <th>Title</th>
+                <th>DESCRIPTION</th>
+                <th>Price</th>
+            </tr>
+           <%category.map((cat,j)=>{%>
+            <tr><td colspan="3"><%=cat%></td></tr>
+                <% for(let i=0;i<data[j].length;i++){ %>
+                 <tr>
+                    <th><%=data[j][i].TITLE%></th>
+                    <th><%=data[j][i].DESCRIPTION%></th>
+                    <th>$<%=data[j][i].PRICE%></th>
+                 </tr>
+                <%}%>
+             <%})%>
+        </table>
+    </div>
+</body>
+</html>

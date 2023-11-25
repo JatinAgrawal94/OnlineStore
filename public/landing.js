@@ -6,30 +6,94 @@ let user_id = 1;
 
 document.getElementById('add-item-button').addEventListener('click', open_add_item_modal);
 
-// Open results.
+// Open results
+// most expensive items in each category
 function open_results_modal() {
     close_all_modals();
+    // get list of all categories and then get most expensive items in that category.
     const results_modal = document.getElementById('results-modal');
     results_modal.style.display = "block";
 }
 
+const catxandy=document.getElementById('catxandy')
+catxandy.addEventListener('click',(e)=>{
+    close_all_modals()
+    document.getElementById("modal-2").style.display="block"
+})
+
+document.getElementById("submit-modal-2").addEventListener("click",(e)=>{
+    e.preventDefault()
+    let cat1=(document.getElementById('category-1').value)
+    let cat2=(document.getElementById('category-2').value)
+    window.open(`/product/category/catxandy?cat1=${cat1}&cat2=${cat2}`,'_blank')
+})
+
+const f3=document.getElementById('f3');
+f3.addEventListener('click',(e)=>{
+    close_all_modals();
+    document.getElementById('modal-3').style.display="block"
+})
+document.getElementById("submit-modal-3").addEventListener('click',(e)=>{
+    e.preventDefault();
+    let cat1=document.getElementById('user').value
+    window.open(`/product/category/p3t3?user=${cat1}`,'_blank')
+})
+
+
 // Display modal corresponding to button clicked.
-const buttons = document.querySelectorAll('#button-grid button');
-buttons.forEach((button, index) => {
-    button.addEventListener('click', function() {
-        close_all_modals();
-        const modal = document.getElementById(`modal-${index + 1}`);
-        if (modal) {
-            modal.style.display = "block";
-        }
-    });
-});
+// const buttons = document.querySelectorAll('#button-grid button');
+// buttons.forEach((button, index) => {
+//     button.addEventListener('click', function() {
+//         close_all_modals();
+//         const modal = document.getElementById(`modal-${index + 1}`);
+//         if (modal) {
+//             modal.style.display = "block";
+//         }
+//     });
+// });
+
+
 
 // Add submit button to each search modal that opens the results page. Will need to customize based on search options.
-const submit_buttons = document.querySelectorAll('.search-modals button');
-submit_buttons.forEach((submitButton, index) => {
-    submitButton.addEventListener('click', open_results_modal);
-});
+// const submit_buttons = document.querySelectorAll('.search-modals button');
+// submit_buttons.forEach((submitButton, index) => {
+//     // get switch case here
+//     submitButton.addEventListener('click', ()=>{
+//         switch(index){
+//             case 0: {getMostExpensiveItems();open_results_modal()}
+//             break;
+//             default: open_results_modal()
+//         }
+//     });
+// });
+
+
+function displayMostExpensiveItems(results){
+    const div=document.createElement("div");
+            const table=document.createElement('table');
+            div.appendChild(table)
+            var row=document.createElement('tr')
+            var col=document.createElement('th')
+            col.innerHTML="Title"
+            row.appendChild(col)
+            col.innerHTML="Price"
+            row.appendChild(col)
+            table.appendChild(row)
+            document.querySelector('.result-table').appendChild(table);
+}
+
+function getMostExpensiveItems(){
+    var xhttp = new XMLHttpRequest();
+    xhttp.open("GET",`/product/category/expensive`, true);
+    xhttp.setRequestHeader('Content-type',"application/json")
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            let result=xhttp.responseText;
+            displayMostExpensiveItems(result)
+        }
+    };
+    xhttp.send()
+}
 
 // Adds a close button to every modal throughout all the code.
 const close_buttons = document.querySelectorAll('.close');
@@ -46,7 +110,6 @@ function display_products(products) {
         p.innerHTML="No Products to Display"
         product_list.append(p)
     }else{
-
         const tr = document.createElement('tr');
         tr.innerHTML = `
         <th>TITLE</th>
@@ -134,7 +197,6 @@ function open_show_reviews_modal(data) {
     }
     modal.style.display = "block";
 }
-
 
 // Save a new review.
 function save_review() {
@@ -240,3 +302,14 @@ document.getElementById('init-button').addEventListener("click",(e)=>{
     };
     xhttp.send()
 })
+
+// kisi din ye tamasha muskurakar ham bhi dekhenge
+// ham bhi dekhenge
+// bharat koi bharat ka tukda nahi hai
+// Terminal Ports Problems Output Debug Console Terminal Ports Landing.js
+// jatin, you are just in mood for a vacation and jatin,its the last mile then I gues you can have a vaca
+// but where, definitely not the wedding jatin, its quite fucking confusing and risky
+
+// ok jatin, we need to go and get some tshirts from ross and some tracks if we can
+// also jatin I know you are craving for love, and that too definitely not from your parents
+// cause they had long gone broken your trust, it takes years to built that same kind of trust

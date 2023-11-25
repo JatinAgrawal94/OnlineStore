@@ -102,7 +102,7 @@ const productData=[
         "USERNAME":"ANSH",
         "TITLE": "Stainless Steel Kitchen Knife Set",
         "DESCRIPTION": "Professional 8-piece chef's knife set with wooden block",
-        "CATEGORY": "Home & Kitchen,knife,knife set",
+        "CATEGORY": "Home&Kitchen,knife,knifeset",
         "PRICE": 129.99,
         "DATE": "2023-10-28"
     },
@@ -110,7 +110,7 @@ const productData=[
         "USERNAME":"ANIKET",
         "TITLE": "Women's Running Shoes",
         "DESCRIPTION": "Lightweight and breathable sneakers for running and sports",
-        "CATEGORY": "Sporting Goods,shoes, running shoes,women shoes",
+        "CATEGORY": "SportingGoods,shoes,runningshoes,womenshoes",
         "PRICE": 79.99,
         "DATE": "2023-11-02"
     },
@@ -118,7 +118,7 @@ const productData=[
         "USERNAME":"JAY",
         "TITLE": "Portable Bluetooth Speaker",
         "DESCRIPTION": "Waterproof and durable outdoor wireless speaker",
-        "CATEGORY": "Electronics,bluetooth,speaker,wireless, portable",
+        "CATEGORY": "Electronics,bluetooth,speaker,wireless,portable",
         "PRICE": 69.99,
         "DATE": "2023-11-05"
     },
@@ -126,7 +126,7 @@ const productData=[
         "USERNAME":"VIKAS",
         "TITLE": "Organic Herbal Tea Sampler",
         "DESCRIPTION": "Assorted collection of premium organic herbal teas",
-        "CATEGORY": "Grocery,tea,herbal, healthytea,organic",
+        "CATEGORY": "Grocery,tea,herbal,healthytea,organic",
         "PRICE": 24.99,
         "DATE": "2023-11-10"
     },
@@ -134,7 +134,7 @@ const productData=[
         "USERNAME":"MEERA",
         "TITLE": "Men's Leather Belt",
         "DESCRIPTION": "Classic reversible leather belt with rotating buckle",
-        "CATEGORY": "Fashion,leather,wallet, men fashion",
+        "CATEGORY": "Fashion,leather,wallet,menfashion",
         "PRICE": 49.99,
         "DATE": "2023-11-15"
     },
@@ -142,7 +142,7 @@ const productData=[
         "USERNAME":"DRASHTI",
         "TITLE": "Digital SLR Camera Kit",
         "DESCRIPTION": "Professional-grade camera bundle with lenses and accessories",
-        "CATEGORY": "Electronics,camera, photography, DSLR",
+        "CATEGORY": "Electronics,camera,photography,DSLR",
         "PRICE": 1299.99,
         "DATE": "2023-11-20"
     },
@@ -150,7 +150,7 @@ const productData=[
         "USERNAME":"VAIBHAV",
         "TITLE": "Rechargeable Handheld Vacuum Cleaner",
         "DESCRIPTION": "Cordless and powerful vacuum for home and car use",
-        "CATEGORY": "Home & Kitchen,vaccum,cleaning products, electric cleaner,home appliances",
+        "CATEGORY": "Home&Kitchen,vaccum,cleaningproducts,electriccleaner,homeappliances",
         "PRICE": 99.99,
         "DATE": "2023-11-25"
     }

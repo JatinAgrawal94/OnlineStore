@@ -35,17 +35,17 @@
         
     </div>
 <!-- Phase 3 Begins -->
-    <!-- <div id="bottom-container">
+    <div id="bottom-container">
         <header>
             <div class="header-center main-header">
                 <h1>Search Tools</h1>
             </div>
         </header>
         <div id="button-grid">
-            <button>Most Expensive Category Items</button>
-            <button>User Posted Twice, Category X & Y</button>
-            <button>Items From X, Excellent & Good</button>
-            <button>Users That Posted Most on 2023/10/18</button>
+           <a href="/product/category/expensive" target="_blank"><button>Most Expensive Category Items</button></a>
+            <button id="catxandy">User Posted Twice, Category X & Y</button>
+            <button id="f3">Items From X, Excellent & Good</button>
+            <button id="f4">Users That Posted Most on 2023/10/18</button>
             <button>Users Favorited by X & Y</button>
             <button>Excellent Items (3+ Excellent)</button>
             <button>Users That Rated Nothing "Poor"</button>
@@ -54,12 +54,12 @@
             <button>Users That Gave Each Other "Excellent"</button>
         </div>
     </div>
-
+    <!-- most expensive items -->
     <div id="results-modal" class="modal">
-        <div class="modal-content search-modals">
+        <div class="modal-content search-modals result-table">
             <span class="close">&times;</span>
             <h2>Results</h2>
-            <p>Temporary Result</p>
+            <!-- <p>Temporary Result</p> -->
         </div>
     </div>
 
@@ -76,18 +76,14 @@
             <span class="close">&times;</span>
             <h2>Users Who Posted At Least 2 Items On The Same Day, One From The First Category Below and One From The Second Category</h2>
             <select id="category-1">
-                <option value="Electronics">ELECTRONICS</option>
-                <option value="Appliances">APPLIANCES</option>
-                <option value="Furniture">FURNITURE</option>
-                <option value="Beauty">BEAUTY</option>
-                <option value="Toys">TOYS</option>
+                <%categories.map((c)=>{%>
+                    <option class="" value=<%=c%>><%=c%></option>
+                    <%})%>
             </select>
             <select id="category-2">
-                <option value="Electronics">ELECTRONICS</option>
-                <option value="Appliances">APPLIANCES</option>
-                <option value="Furniture">FURNITURE</option>
-                <option value="Beauty">BEAUTY</option>
-                <option value="Toys">TOYS</option>
+                <%categories.map((c)=>{%>
+                    <option class="" value=<%=c%>><%=c%></option>
+                    <%})%>
             </select>
             <button id="submit-modal-2">Submit</button>
         </div>
@@ -97,7 +93,11 @@
         <div class="modal-content search-modals">
             <span class="close">&times;</span>
             <h2>Items Posted By The User Below That All Received Either "Excellent" Or "Good" Reviews</h2>
-            <input type="text" placeholder="Enter Username">
+            <select id="user">
+                <%user.map((c)=>{%>
+                    <option class="" value=<%=c.USERNAME%>><%=c.USERNAME%></option>
+                <%})%>
+            </select>
             <button id="submit-modal-3">Submit</button>
         </div>
     </div>
@@ -158,7 +158,7 @@
             <h2>Users A & B Such That They Have Always Given Each Other "Excellent" For Each Listed Item</h2>
             <button id="submit-modal-10">Submit</button>
         </div>
-    </div> -->
+    </div> 
     
 <!-- Phase 3 ends -->
     <div id="add-item-modal" class="modal">

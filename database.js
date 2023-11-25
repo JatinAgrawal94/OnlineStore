@@ -1,5 +1,18 @@
 const {userData,productData,reviewData}=require('./dataarray')
 
+const getAllUsers=(db)=>{
+    const query="SELECT * FROM USER";
+    return new Promise((resolve,reject)=>{
+        db.query(query,(err,result)=>{
+            if(err){
+                reject(err.sqlMessage)
+            }else{
+                resolve(JSON.parse(JSON.stringify(result)))
+            }
+        })
+    })
+}
+
 const getProductForCategory=(db,category)=>{
     const query="SELECT * FROM PRODUCT WHERE CATEGORY LIKE ?";
     return new Promise((resolve,reject)=>{
@@ -48,6 +61,38 @@ const getAllProducts =(db)=>{
         ,(err,result)=>{
         if(err) {reject( err.sqlMessage)}
         else { resolve (JSON.parse(JSON.stringify(result)))};
+    }))
+}
+
+const getMostExpensiveItemsInCategory=(db,category)=>{
+    const query="SELECT * FROM PRODUCT WHERE CATEGORY LIKE ? AND PRICE = ( SELECT MAX(PRICE) FROM PRODUCT WHERE CATEGORY LIKE ?);"
+    return new Promise((resolve,reject)=>db.query(query,['%'+category+'%','%'+category+'%'],(err,result)=>{
+        if(err){reject(err.sqlMessage)}
+        else{resolve(JSON.parse(JSON.stringify(result)))};
+    }))
+}
+
+const getCatXandY=(db,cat1,cat2)=>{
+    const query="SELECT USERNAME FROM PRODUCT WHERE DATE IN ( SELECT DATE FROM PRODUCT GROUP BY DATE HAVING COUNT(DISTINCT CATEGORY) >=2) AND (CATEGORY LIKE ? OR CATEGORY LIKE ?) GROUP BY USERNAME,DATE HAVING COUNT(DISTINCT CATEGORY)=2";
+    return new Promise((resolve,reject)=>db.query(query,['%'+cat1+'%','%'+cat2+'%'],(err,result)=>{
+        if(err){
+            reject(err.sqlMessage)
+        }
+        else{
+            resolve(JSON.parse(JSON.stringify(result)))
+        }
+    }))
+}
+
+const phase3part3=(db,user)=>{
+    const query="SELECT DISTINCT P.PRODUCTID,P.TITLE,P.DESCRIPTION,P.PRICE,MIN(R.REVIEW_TYPE) AS REVIEW_TYPE FROM PRODUCT P JOIN REVIEW R ON P.PRODUCTID = R.PRODUCTID WHERE P.USERNAME = ? AND (R.REVIEW_TYPE = ? OR R.REVIEW_TYPE = ?) GROUP BY P.PRODUCTID, P.TITLE, P.DESCRIPTION, P.PRICE";
+    return new Promise((resolve,reject)=>db.query(query,[user,'Excellent','Good'],(err,result)=>{
+        if(err){
+            reject(err.sqlMessage)
+        }
+        else{
+            resolve(JSON.parse(JSON.stringify(result)))
+        }
     }))
 }
 
@@ -178,5 +223,5 @@ const initializeDB=async(db)=>{
     
 }
 
-module.exports={CreateProduct,addReview,getAllProducts,getAllReviews,getProductForCategory,getAllReviews,initializeDB,checkforDB}
+module.exports={getAllUsers,phase3part3,getCatXandY,getMostExpensiveItemsInCategory,CreateProduct,addReview,getAllProducts,getAllReviews,getProductForCategory,getAllReviews,initializeDB,checkforDB}
 
