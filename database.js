@@ -96,6 +96,102 @@ const phase3part3=(db,user)=>{
     }))
 }
 
+const phase4part4=(db,date)=>{
+    const query="SELECT USERNAME FROM PRODUCT WHERE DATE = ? GROUP BY USERNAME HAVING COUNT(PRODUCTID) = (SELECT COUNT(PRODUCTID) FROM PRODUCT WHERE DATE = ? GROUP BY USERNAME ORDER BY COUNT(PRODUCTID) DESC LIMIT 1);"
+    return new Promise((resolve,reject)=>db.query(query,[date,date],(err,result)=>{
+        if(err){
+            reject(err.sqlMessage)
+        }
+        else{
+            resolve(JSON.parse(JSON.stringify(result)))
+        }
+    }))
+}
+
+const phase5part5=(db,user1,user2)=>{
+    const query="SELECT USERNAME,FAVOURITES FROM USER WHERE USERNAME IN (?,?);"
+    return new Promise((resolve,reject)=>db.query(query,[user1,user2],(err,result)=>{
+        if(err){
+            reject(err.sqlMessage)
+        }
+        else{
+            resolve(JSON.parse(JSON.stringify(result)))
+        }
+    }))
+}
+const phase6part6=(db)=>{
+    const query="SELECT DISTINCT P.USERNAME FROM PRODUCT P WHERE P.USERNAME NOT IN (SELECT DISTINCT P2.USERNAME FROM PRODUCT P2 JOIN REVIEW R ON P2.PRODUCTID = R.PRODUCTID     WHERE R.REVIEW_TYPE = 'Excellent' GROUP BY P2.USERNAME, P2.PRODUCTID HAVING COUNT(DISTINCT R.REVIEWID) >= 3 );"
+    return new Promise((resolve,reject)=>db.query(query,(err,result)=>{
+        if(err){
+            reject(err.sqlMessage)
+        }
+        else{
+            resolve(JSON.parse(JSON.stringify(result)))
+        }
+    }))
+}
+
+const phase7part7=(db)=>{
+    const query="SELECT DISTINCT U.USERNAME FROM USER U WHERE U.USERNAME NOT IN (SELECT DISTINCT R.USERNAME FROM REVIEW R WHERE R.REVIEW_TYPE = 'Poor');"
+    return new Promise((resolve,reject)=>db.query(query,(err,result)=>{
+        if(err){
+            reject(err.sqlMessage)
+        }
+        else{
+            resolve(JSON.parse(JSON.stringify(result)))
+        }
+    }))
+}
+
+const phase8part8=(db)=>{
+    const query="SELECT DISTINCT U.USERNAME FROM USER U WHERE U.USERNAME NOT IN (SELECT DISTINCT R1.USERNAME FROM REVIEW R1 WHERE R1.REVIEW_TYPE <> 'Poor' AND R1.USERNAME IS NOT NULL)AND U.USERNAME IN (SELECT DISTINCT R2.USERNAME FROM REVIEW R2 WHERE R2.REVIEW_TYPE = 'Poor' AND R2.USERNAME IS NOT NULL);"
+    return new Promise((resolve,reject)=>db.query(query,(err,result)=>{
+        if(err){
+            reject(err.sqlMessage)
+        }
+        else{
+            resolve(JSON.parse(JSON.stringify(result)))
+        }
+    }))
+}
+
+const phase9part9=(db)=>{
+    const query="SELECT DISTINCT P.USERNAME FROM PRODUCT P LEFT JOIN REVIEW R ON P.PRODUCTID = R.PRODUCTID AND R.REVIEW_TYPE = 'Poor' WHERE R.PRODUCTID IS NULL AND P.USERNAME NOT IN (SELECT DISTINCT P2.USERNAME FROM PRODUCT P2 WHERE P2.PRODUCTID NOT IN (SELECT DISTINCT R2.PRODUCTID FROM REVIEW R2));"
+    return new Promise((resolve,reject)=>db.query(query,(err,result)=>{
+        if(err){
+            reject(err.sqlMessage)
+        }
+        else{
+            resolve(JSON.parse(JSON.stringify(result)))
+        }
+    }))
+}
+
+const phase10part10=(db)=>{
+    const query=`SELECT DISTINCT
+    CASE WHEN U1.USERNAME < U2.USERNAME THEN U1.USERNAME ELSE U2.USERNAME END AS USER_A,
+    CASE WHEN U1.USERNAME < U2.USERNAME THEN U2.USERNAME ELSE U1.USERNAME END AS USER_B
+FROM USER U1
+JOIN PRODUCT P1 ON U1.USERNAME = P1.USERNAME
+LEFT JOIN REVIEW R1 ON P1.PRODUCTID = R1.PRODUCTID AND R1.REVIEW_TYPE = 'Excellent'
+JOIN USER U2 ON U2.USERNAME <> U1.USERNAME
+JOIN PRODUCT P2 ON U2.USERNAME = P2.USERNAME
+LEFT JOIN REVIEW R2 ON P2.PRODUCTID = R2.PRODUCTID AND R2.REVIEW_TYPE = 'Excellent'
+WHERE (
+    (R1.USERNAME = U2.USERNAME AND R1.REVIEW_TYPE = 'Excellent' AND R2.REVIEWID IS NULL)
+    OR
+    (R2.USERNAME = U1.USERNAME AND R2.REVIEW_TYPE = 'Excellent' AND R1.REVIEWID IS NULL)
+);`
+    return new Promise((resolve,reject)=>db.query(query,(err,result)=>{
+        if(err){
+            reject(err.sqlMessage)
+        }
+        else{
+            resolve(JSON.parse(JSON.stringify(result)))
+        }
+    }))
+}
+
 const addReview=(db,data)=>{
     const query="SELECT * FROM PRODUCT WHERE PRODUCTID=? AND USERNAME=?"
     let date=new Date();
@@ -223,5 +319,5 @@ const initializeDB=async(db)=>{
     
 }
 
-module.exports={getAllUsers,phase3part3,getCatXandY,getMostExpensiveItemsInCategory,CreateProduct,addReview,getAllProducts,getAllReviews,getProductForCategory,getAllReviews,initializeDB,checkforDB}
+module.exports={getAllUsers,phase7part7,phase8part8,phase9part9,phase10part10,phase6part6,phase5part5,phase4part4,phase3part3,getCatXandY,getMostExpensiveItemsInCategory,CreateProduct,addReview,getAllProducts,getAllReviews,getProductForCategory,getAllReviews,initializeDB,checkforDB}
 

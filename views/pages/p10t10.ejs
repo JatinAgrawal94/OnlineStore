@@ -1,0 +1,40 @@
+<!-- this file shows design of phase 3 req10-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phase3-Test10</title>
+    <link rel="icon" type="image/x-icon" href="./favicon.png">
+
+    <style>
+        html{
+            background-color: #eceff3;
+        }
+        table tr,th,td{
+            border:1px solid black;
+            padding: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <h1>List a user pair (A, B) such that they always gave each other "excellent" reviews for every single
+            item they posted.</h1>
+        <table>
+            <tr>
+                <th>USER-A</th>
+                <th>USER-B</th>
+            </tr>
+            <%users.map((u)=>{%>
+                <tr>
+                    <th><%=u.USER_A%></th>
+                    <th><%=u.USER_B%></th>
+                </tr>
+            <%})%>
+        </table>
+    </div>
+</body>
+</html>
+

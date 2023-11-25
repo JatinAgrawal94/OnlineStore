@@ -1,0 +1,35 @@
+<!-- this file shows design of phase 3 req5 -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phase3-Test5</title>
+    <link rel="icon" type="image/x-icon" href="./favicon.png">
+
+    <style>
+        html{
+            background-color: #eceff3;
+        }
+        table tr,th,td{
+            border:1px solid black;
+            padding: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <h1>List the other users who are favorited by both users X, and Y. Usernames X and Y will be
+            selected from dropdown menus by the instructor. </h1>
+        <h2>User1: <%=inputuser.user1%> User2: <%=inputuser.user2%></h2>
+        <table>
+            <tr><th>USERS</th></tr>
+            <%users.map((u)=>{%>
+                <tr><th><%=u%></th></tr>
+            <%})%>
+        </table>
+    </div>
+</body>
+</html>
+

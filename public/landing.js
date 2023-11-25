@@ -15,12 +15,6 @@ function open_results_modal() {
     results_modal.style.display = "block";
 }
 
-const catxandy=document.getElementById('catxandy')
-catxandy.addEventListener('click',(e)=>{
-    close_all_modals()
-    document.getElementById("modal-2").style.display="block"
-})
-
 document.getElementById("submit-modal-2").addEventListener("click",(e)=>{
     e.preventDefault()
     let cat1=(document.getElementById('category-1').value)
@@ -28,29 +22,62 @@ document.getElementById("submit-modal-2").addEventListener("click",(e)=>{
     window.open(`/product/category/catxandy?cat1=${cat1}&cat2=${cat2}`,'_blank')
 })
 
-const f3=document.getElementById('f3');
-f3.addEventListener('click',(e)=>{
-    close_all_modals();
-    document.getElementById('modal-3').style.display="block"
-})
+
 document.getElementById("submit-modal-3").addEventListener('click',(e)=>{
     e.preventDefault();
     let cat1=document.getElementById('user').value
     window.open(`/product/category/p3t3?user=${cat1}`,'_blank')
 })
 
+document.getElementById("submit-modal-4").addEventListener('click',(e)=>{
+    e.preventDefault();
+    let cat1=document.querySelector("#modal-4 input").value
+    window.open(`/product/category/p4t4?date=${cat1}`,'_blank')
+})
+
+document.getElementById("submit-modal-5").addEventListener('click',(e)=>{
+    e.preventDefault();
+    let user1=document.getElementById('t5-user1').value
+    let user2=document.getElementById('t5-user2').value
+    window.open(`/product/category/p5t5?user1=${user1}&user2=${user2}`,'_blank')
+})
+
+document.getElementById("submit-modal-6").addEventListener('click',(e)=>{
+    e.preventDefault();
+    window.open(`/product/category/p6t6`,'_blank')
+})
+document.getElementById("submit-modal-7").addEventListener('click',(e)=>{
+    e.preventDefault();
+    window.open(`/product/category/p7t7`,'_blank')
+})
+
+document.getElementById("submit-modal-8").addEventListener('click',(e)=>{
+    e.preventDefault();
+    window.open(`/product/category/p8t8`,'_blank')
+})
+
+document.getElementById("submit-modal-9").addEventListener('click',(e)=>{
+    e.preventDefault();
+    window.open(`/product/category/p9t9`,'_blank')
+})
+
+document.getElementById("submit-modal-10").addEventListener('click',(e)=>{
+    e.preventDefault();
+    window.open(`/product/category/p10t10`,'_blank')
+})
+
 
 // Display modal corresponding to button clicked.
-// const buttons = document.querySelectorAll('#button-grid button');
-// buttons.forEach((button, index) => {
-//     button.addEventListener('click', function() {
-//         close_all_modals();
-//         const modal = document.getElementById(`modal-${index + 1}`);
-//         if (modal) {
-//             modal.style.display = "block";
-//         }
-//     });
-// });
+const buttons = document.querySelectorAll('#button-grid button');
+buttons.forEach((button, index) => {
+    button.addEventListener('click', function() {
+        close_all_modals();
+        const modal = document.getElementById(`modal-${index + 1}`);
+        if (modal) {
+            modal.style.display = "block";
+        }
+    });
+});
 
 
 

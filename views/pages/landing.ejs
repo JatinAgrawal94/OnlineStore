@@ -43,9 +43,9 @@
         </header>
         <div id="button-grid">
            <a href="/product/category/expensive" target="_blank"><button>Most Expensive Category Items</button></a>
-            <button id="catxandy">User Posted Twice, Category X & Y</button>
-            <button id="f3">Items From X, Excellent & Good</button>
-            <button id="f4">Users That Posted Most on 2023/10/18</button>
+            <button>User Posted Twice, Category X & Y</button>
+            <button>Items From X, Excellent & Good</button>
+            <button>Users That Posted Most on 2023/10/18</button>
             <button>Users Favorited by X & Y</button>
             <button>Excellent Items (3+ Excellent)</button>
             <button>Users That Rated Nothing "Poor"</button>
@@ -105,7 +105,8 @@
     <div id="modal-4" class="modal">
         <div class="modal-content search-modals">
             <span class="close">&times;</span>
-            <h2>Users That Posted The Most Items On 2023/10/18</h2>
+            <h2>Users That Posted The Most Items On A particular date</h2>
+            <input type="date">
             <button id="submit-modal-4">Submit</button>
         </div>
     </div>
@@ -114,8 +115,16 @@
         <div class="modal-content search-modals">
             <span class="close">&times;</span>
             <h2>Users Favorited By Both Users Below</h2>
-            <input type="text" placeholder="Enter Username">
-            <input type="text" placeholder="Enter Username">
+            <select id="t5-user1">
+                <%user.map((c)=>{%>
+                    <option class="" value=<%=c.USERNAME%>><%=c.USERNAME%></option>
+                <%})%>
+            </select>
+            <select id="t5-user2">
+                <%user.map((c)=>{%>
+                    <option class="" value=<%=c.USERNAME%>><%=c.USERNAME%></option>
+                <%})%>
+            </select>
             <button id="submit-modal-5">Submit</button>
         </div>
     </div>
