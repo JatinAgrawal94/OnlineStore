@@ -16,6 +16,8 @@ Student Id: 203144857
 Section2
 Contributions: Setting up DB and respective requirements, Establishing queries required to meet the goals.
 
+Github Repo: https://github.com/JatinAgrawal94/OnlineStore
+
 Phase 1 Video: https://youtu.be/sU4zqiFr5aU
 Phase 2 Video: https://youtu.be/209RHxeWZ3o?si=2lIo3V5YtfE_rUMP
 Phase 3 Video: https://youtu.be/xtnYFJXJTYo
