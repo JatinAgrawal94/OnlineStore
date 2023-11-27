@@ -5,69 +5,79 @@ const userData=[
         "123456",
         "JATIN",
         "AGRAWAL",
+        "BHAVYA,ANIKET"
     ],
     [
         "RAJ",
         "raj@gmail.com",
         "123456",
         "RAJ",
-        "KUMAR"
+        "KUMAR",
+        "JATIN"
     ],
     [
         "BHAVYA",
         "bhavya@gmail.com",
         "123456",
         "BHAVYA",
-        "JAIN"
+        "JAIN",
+        "ANSH,JATIN,MEERA"
     ],
     [
         "ANSH",
         "ansh@gmail.com",
         "123456",
         "ANSH",
-        "LAL"
+        "LAL",
+        "BHAVYA,MEERA,VAIBHAV"
     ],
     [
         "ANIKET",
         "aniket@gmail.com",
         "123456",
         "ANIKET",
-        "PARMAR"
+        "PARMAR",
+        "BHAVYA,ANSH"
     ],
     [
         "JAY",
         "jay@gmail.com",
         "123456",
         "JAY",
-        "SURTI"
+        "SURTI",
+        "ANIKET,ANSH"
     ],
     [
         "VIKAS",
         "vikas@gmail.com",
         "123456",
         "VIKAS",
-        "SARDHARA"
+        "SARDHARA",
+        "BHAVYA"
     ],
     [
         "MEERA",
         "meera@gmail.com",
         "123456",
         "MEERA",
-        "KASUNDRA"
+        "KASUNDRA",
+        "ANSH,BHAVYA"
     ],
     [
         "DRASHTI",
         "drashti@gmail.com",
         "123456",
         "DRASHTI",
-        "PARMAR"
+        "PARMAR",
+        "JATIN"
     ],
     [
         "VAIBHAV",
         "vaibhav@gmail.com",
         "123456",
         "VAIBHAV",
-        "KOLADIYA"
+        "KOLADIYA",
+        "ANSH,BHAVYA,MEERA"
     ],
 ]
 
@@ -78,7 +88,7 @@ const productData=[
          "High-quality over-ear headphones with noise cancellation",
          "Electronics,bluetooh,headphones,earphones,wireless",
          149.99,
-         "2023-10-15"
+         "2023-10-20"
     ],
     [
         "RAJ",
@@ -100,7 +110,7 @@ const productData=[
         "ANSH",
          "Stainless Steel Kitchen Knife Set",
          "Professional 8-piece chef's knife set with wooden block",
-         "Home & Kitchen,knife,knife set",
+         "Home&Kitchen,knife,knifeset",
          129.99,
          "2023-10-28"
     ],
@@ -108,7 +118,7 @@ const productData=[
         "ANIKET",
          "Women's Running Shoes",
          "Lightweight and breathable sneakers for running and sports",
-         "Sporting Goods,shoes, running shoes,women shoes",
+         "SportingGoods,shoes,runningshoes,womenshoes",
          79.99,
          "2023-11-02"
     ],
@@ -116,7 +126,7 @@ const productData=[
         "JAY",
          "Portable Bluetooth Speaker",
          "Waterproof and durable outdoor wireless speaker",
-         "Electronics,bluetooth,speaker,wireless, portable",
+         "Electronics,bluetooth,speaker,wireless,portable",
          69.99,
          "2023-11-05"
     ],
@@ -124,7 +134,7 @@ const productData=[
         "VIKAS",
          "Organic Herbal Tea Sampler",
          "Assorted collection of premium organic herbal teas",
-         "Grocery,tea,herbal, healthytea,organic",
+         "Grocery,tea,herbal,healthytea,organic",
          24.99,
          "2023-11-10"
     ],
@@ -132,7 +142,7 @@ const productData=[
         "MEERA",
          "Men's Leather Belt",
          "Classic reversible leather belt with rotating buckle",
-         "Fashion,leather,wallet, men fashion",
+         "Fashion,leather,wallet,menfashion",
          49.99,
          "2023-11-15"
     ],
@@ -140,7 +150,7 @@ const productData=[
         "DRASHTI",
          "Digital SLR Camera Kit",
          "Professional-grade camera bundle with lenses and accessories",
-         "Electronics,camera, photography, DSLR",
+         "Electronics,camera,photography,DSLR",
          1299.99,
          "2023-11-20"
     ],
@@ -148,9 +158,25 @@ const productData=[
         "VAIBHAV",
          "Rechargeable Handheld Vacuum Cleaner",
          "Cordless and powerful vacuum for home and car use",
-         "Home & Kitchen,vaccum,cleaning products, electric cleaner,home appliances",
+         "Home&Kitchen,vaccum,cleaningproducts,electriccleaner,homeappliances",
          99.99,
          "2023-11-25"
+    ],
+    [
+        "Jatin",
+        "Dell Laptop",
+        "This laptop is very fast",
+        "Laptop,Electronics",
+        1299.99,
+        "2023-10-20"
+    ],
+    [
+        "RAJ",
+        "3-Stage Wooden Drawer",
+        "Original Teak Wood and made by skilled carpenters",
+        "Furniture,drawer,wood",
+        149.99,
+        "2023-10-20"
     ]
 ]
 
@@ -160,8 +186,8 @@ const reviewData=[
         "VAIBHAV",
          "1",
          "2023-11-10",
-         "Excellent",
-         "Absolutely amazing sound quality and comfortable to wear for hours.",
+         "Poor",
+         "Terrible Headphones",
     ],
     [   
         "DRASHTI",
@@ -202,7 +228,7 @@ const reviewData=[
         "ANSH",
          "7",
          "2023-11-15",
-         "Good",
+         "Excellent",
          "Delicious teas, but the packaging could be improved."
     ],
     [
@@ -237,7 +263,7 @@ const reviewData=[
         "VAIBHAV",
          "2",
          "2023-12-08",
-         "Fair",
+         "Poor",
          "Decent quality leather, but stitching could be improved."
     ],
     [
@@ -265,7 +291,7 @@ const reviewData=[
         "VAIBHAV",
          "6",
          "2023-12-20",
-         "Good",
+         "Poor",
          "Impressive sound quality and portable design."
     ],
     [
@@ -295,6 +321,55 @@ const reviewData=[
          "2024-01-05",
          "Fair",
          "Decent suction power, but battery life needs improvement."
+    ],
+    [
+        "MEERA",
+        "1",
+        "2023-11-23",
+        "Excellent",
+        "Good Product!"
+    ],
+    [
+        "DRASHTI",
+        "1",
+        "2023-11-23",
+        "Excellent",
+        "Good Product!"
+    ],
+    [
+        "MEERA",
+        "2",
+        "2023-11-23",
+        "Poor",
+        "Very Bad Product!"
+    ],
+    [
+        "RAJ",
+        "1",
+        "2023-11-23",
+        "Excellent",
+        "Excellent Product!"
+    ],
+    [
+        "JATIN",
+        "2",
+        "2023-11-25",
+        "Excellent",
+        "Outstanding Product!"
+    ],
+    [
+        "BHAVYA",
+        "2",
+        "2023-11-25",
+        "Excellent",
+        "Outstanding Product!"
+    ],
+    [
+        "ANSH",
+        "2",
+        "2023-11-25",
+        "Excellent",
+        "Outstanding Product!"
     ]
 ]
 
