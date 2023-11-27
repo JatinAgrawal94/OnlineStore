@@ -137,7 +137,6 @@ productRouter.get('/category/p5t5',async(req,res)=>{
                 }
             }
         }
-        console.log(final)
         res.render('pages/p5t5',{users:final,inputuser:query})
     } catch (error) {
         res.render('pages/404')

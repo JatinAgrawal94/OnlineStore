@@ -330,13 +330,7 @@ document.getElementById('init-button').addEventListener("click",(e)=>{
     xhttp.send()
 })
 
-// kisi din ye tamasha muskurakar ham bhi dekhenge
-// ham bhi dekhenge
-// bharat koi bharat ka tukda nahi hai
-// Terminal Ports Problems Output Debug Console Terminal Ports Landing.js
-// jatin, you are just in mood for a vacation and jatin,its the last mile then I gues you can have a vaca
-// but where, definitely not the wedding jatin, its quite fucking confusing and risky
-
-// ok jatin, we need to go and get some tshirts from ross and some tracks if we can
-// also jatin I know you are craving for love, and that too definitely not from your parents
-// cause they had long gone broken your trust, it takes years to built that same kind of trust
+document.getElementById('favourites').addEventListener('click',(e)=>{
+    let user=localStorage.getItem('username').toUpperCase()
+    window.open(`/auth/favourites?username=${user}`,'_blank')
+})

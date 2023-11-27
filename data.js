@@ -7,69 +7,79 @@ const userData=[
         PASSWORD:"123456",
         FIRSTNAME:"JATIN",
         LASTNAME:"AGRAWAL",
+        FAVOURITES: "BHAVYA,ANIKET"
     },
     {
         USERNAME:"RAJ",
         EMAIL:"raj@gmail.com",
         PASSWORD:"123456",
         FIRSTNAME:"RAJ",
-        LASTNAME:"KUMAR"
+        LASTNAME:"KUMAR",
+        FAVOURITES: "JATIN"
     },
     {
         USERNAME:"BHAVYA",
         EMAIL:"bhavya@gmail.com",
         PASSWORD:"123456",
         FIRSTNAME:"BHAVYA",
-        LASTNAME:"JAIN"
+        LASTNAME:"JAIN",
+        FAVOURITES: "ANSH,JATIN,MEERA"
     },
     {
         USERNAME:"ANSH",
         EMAIL:"ansh@gmail.com",
         PASSWORD:"123456",
         FIRSTNAME:"ANSH",
-        LASTNAME:"LAL"
+        LASTNAME:"LAL",
+        FAVOURITES: "BHAVYA,MEERA,VAIBHAV"
     },
     {
         USERNAME:"ANIKET",
         EMAIL:"aniket@gmail.com",
         PASSWORD:"123456",
         FIRSTNAME:"ANIKET",
-        LASTNAME:"PARMAR"
+        LASTNAME:"PARMAR",
+        FAVOURITES: "BHAVYA,ANSH"
     },
     {
         USERNAME:"JAY",
         EMAIL:"jay@gmail.com",
         PASSWORD:"123456",
         FIRSTNAME:"JAY",
-        LASTNAME:"SURTI"
+        LASTNAME:"SURTI",
+        FAVOURITES: "ANIKET,ANSH"
     },
     {
         USERNAME:"VIKAS",
         EMAIL:"vikas@gmail.com",
         PASSWORD:"123456",
         FIRSTNAME:"VIKAS",
-        LASTNAME:"SARDHARA"
+        LASTNAME:"SARDHARA",
+        FAVOURITES: "BHAVYA"
     },
     {
         USERNAME:"MEERA",
         EMAIL:"meera@gmail.com",
         PASSWORD:"123456",
         FIRSTNAME:"MEERA",
-        LASTNAME:"KASUNDRA"
+        LASTNAME:"KASUNDRA",
+        FAVOURITES: "ANSH,BHAVYA"
     },
     {
         USERNAME:"DRASHTI",
         EMAIL:"drashti@gmail.com",
         PASSWORD:"123456",
         FIRSTNAME:"DRASHTI",
-        LASTNAME:"PARMAR"
+        LASTNAME:"PARMAR",
+        FAVOURITES: "JATIN"
     },
     {
         USERNAME:"VAIBHAV",
         EMAIL:"vaibhav@gmail.com",
         PASSWORD:"123456",
         FIRSTNAME:"VAIBHAV",
-        LASTNAME:"KOLADIYA"
+        LASTNAME:"KOLADIYA",
+        FAVOURITES: "ANSH,BHAVYA,MEERA"
     },
 ]
 
@@ -108,7 +118,7 @@ const productData=[
     },
     {
         "USERNAME":"ANIKET",
-        "TITLE": "Women's Running Shoes",
+        "TITLE": "omen's Running Shoes",
         "DESCRIPTION": "Lightweight and breathable sneakers for running and sports",
         "CATEGORY": "SportingGoods,shoes,runningshoes,womenshoes",
         "PRICE": 79.99,
@@ -153,6 +163,22 @@ const productData=[
         "CATEGORY": "Home&Kitchen,vaccum,cleaningproducts,electriccleaner,homeappliances",
         "PRICE": 99.99,
         "DATE": "2023-11-25"
+    },
+    {
+        "USERNAME":"Jatin",
+        "TITLE": "Dell Laptop",
+        "DESCRIPTION": "This laptop is very fast",
+        "CATEGORY": "Laptop,Electronics",
+        "PRICE": 1299.99,
+        "DATE": "2023-10-20"
+    },
+    {
+        "USERNAME":"RAJ",
+        "TITLE": "3-Stage Wooden Drawer",
+        "DESCRIPTION": "Original Teak Wood and made by skilled carpenters",
+        "CATEGORY": "Furniture,drawer,wood",
+        "PRICE": 149.99,
+        "DATE": "2023-10-20"
     }
 ]
 
@@ -298,6 +324,55 @@ const reviewData=[
         "REVIEW_DATE": "2024-01-05",
         "REVIEW_TYPE": "Fair",
         "REVIEW_DESC": "Decent suction power, but battery life needs improvement."
+    },
+    {
+        "USERNAME":"MEERA",
+        "PRODUCTID": "1",
+        "REVIEW_DATE": "2023-11-23",
+        "REVIEW_TYPE": "Excellent",
+        "REVIEW_DESC": "Good Product!"
+    },
+    {
+        "USERNAME":"DRASHTI",
+        "PRODUCTID": "1",
+        "REVIEW_DATE": "2023-11-23",
+        "REVIEW_TYPE": "Excellent",
+        "REVIEW_DESC": "Good Product!"
+    },
+    {
+        "USERNAME":"MEERA",
+        "PRODUCTID": "2",
+        "REVIEW_DATE": "2023-11-23",
+        "REVIEW_TYPE": "Poor",
+        "REVIEW_DESC": "Very Bad Product!"
+    },
+    {
+        "USERNAME":"RAJ",
+        "PRODUCTID": "1",
+        "REVIEW_DATE": "2023-11-23",
+        "REVIEW_TYPE": "Excellent",
+        "REVIEW_DESC": "Excellent Product!"
+    },
+    {
+        "USERNAME":"JATIN",
+        "PRODUCTID": "2",
+        "REVIEW_DATE": "2023-11-25",
+        "REVIEW_TYPE": "Excellent",
+        "REVIEW_DESC": "Outstanding Product!"
+    },
+    {
+        "USERNAME":"BHAVYA",
+        "PRODUCTID": "2",
+        "REVIEW_DATE": "2023-11-25",
+        "REVIEW_TYPE": "Excellent",
+        "REVIEW_DESC": "Outstanding Product!"
+    },
+    {
+        "USERNAME":"ANSH",
+        "PRODUCTID": "2",
+        "REVIEW_DATE": "2023-11-25",
+        "REVIEW_TYPE": "Excellent",
+        "REVIEW_DESC": "Outstanding Product!"
     }
 ]
 

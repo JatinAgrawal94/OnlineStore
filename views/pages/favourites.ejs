@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="./favicon.png">
+    <title>Favourites</title>
+    <style>
+        html{
+            background-color: #eceff3;
+        }
+
+    </style>
+</head>
+<body>
+    <div>
+        <div>
+        <h1>
+            Favourites Users for User <%=user%>
+        </h1>
+            <ul>
+                <%fav.map((f)=>{%>
+                     <li><%=f%></li>
+                <%})%>
+            </ul>
+        </div>
+        <div>
+            <p>Add a new set of Favourites for this user</p>
+            <p>**Refresh this page to clear the list</p>
+            <select name="" id="fav-list">
+                <%users.map((u)=>{%>
+                    <option class="fav-options" value=<%=u.USERNAME%>><%=u.USERNAME%></option>
+                <%})%>
+            </select>
+        </div>
+        <ul id="final-list"></ul>
+        <button id="update-button">Update</button>
+        <p id="result"></p>
+    </div>
+    <script>
+        var list=document.getElementById('fav-list')
+        var finallist=[]
+        var options=document.querySelectorAll('.fav-options')
+        var result=document.getElementById('final-list')
+        options.forEach((e,i)=>{
+            e.addEventListener('click',()=>{
+                finallist.push(e.value);
+                e.setAttribute('disabled','true');
+                let li=document.createElement('li')
+                li.innerHTML=e.value;
+                result.appendChild(li)
+            })
+        })
+        
+        let update=document.getElementById('update-button')
+        update.addEventListener('click',(e)=>{
+            let result=finallist.join(',')
+            const urlParams = new URLSearchParams(window.location.search);
+            const myParam = urlParams.get('username').toUpperCase();
+            var xhttp = new XMLHttpRequest();
+            xhttp.open("POST",`/auth/favourites/update?username=${myParam}`, true);
+            xhttp.setRequestHeader('Content-type',"application/json")
+            xhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    document.getElementById('result').innerHTML="Update Success!"
+                }
+            };
+            xhttp.send(JSON.stringify({fav:result}))
+        })
+    </script>
+</body>
+</html>

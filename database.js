@@ -223,7 +223,6 @@ const addReview=(db,data)=>{
     }).catch((err)=>{
     })
 }
-
 // insert into review where username="" and 
 
 const getAllReviews=(db,productid)=>{
@@ -237,7 +236,35 @@ const getAllReviews=(db,productid)=>{
             }
         })
     })
+}
 
+const getFavourites=(db,username)=>{
+    const query="SELECT FAVOURITES FROM USER WHERE USERNAME = ?"
+    return new Promise((resolve,reject)=>{
+        db.query(query,[username],(err,result)=>{
+            result=JSON.parse(JSON.stringify(result))
+            if(err){
+                reject(err.sqlMessage)
+            }else{
+                resolve(result)
+            }
+        })
+    })
+}
+
+const updateFavourites=(db,username,fav)=>{
+    const query="UPDATE USER SET FAVOURITES= ? WHERE USERNAME= ?"
+    return new Promise((resolve,reject)=>{
+        db.query(query,[fav.toString(),username.toString()],(err,result)=>{
+            // result=JSON.parse(JSON.stringify(result))
+            if(err){
+                console.log(err.sqlMessage)
+                reject(err.sqlMessage)
+            }else{
+                resolve(result)
+            }
+        })
+    })
 }
 
 const checkforDB=async(db)=>{
@@ -277,7 +304,7 @@ const initializeDB=async(db)=>{
     }
     
     // create user table
-    const q1="CREATE TABLE USER (USERNAME VARCHAR(255),EMAIL VARCHAR(255) UNIQUE NOT NULL,PASSWORD VARCHAR(255) NOT NULL,FIRSTNAME VARCHAR(255) NOT NULL,LASTNAME VARCHAR(255) NOT NULL,PRIMARY KEY(USERNAME))";
+    const q1="CREATE TABLE USER (USERNAME VARCHAR(255),EMAIL VARCHAR(255) UNIQUE NOT NULL,PASSWORD VARCHAR(255) NOT NULL,FIRSTNAME VARCHAR(255) NOT NULL,LASTNAME VARCHAR(255) NOT NULL,FAVOURITES VARCHAR(255) NOT NULL NOT NULL,PRIMARY KEY(USERNAME))";
     // create product table
     const q2="CREATE TABLE PRODUCT (PRODUCTID INT AUTO_INCREMENT, TITLE VARCHAR(255) NOT NULL,DESCRIPTION VARCHAR(255) NOT NULL,CATEGORY VARCHAR(255) NOT NULL,PRICE DECIMAL(7,2) NOT NULL,USERNAME VARCHAR(255),DATE DATE NOT NULL,FOREIGN KEY(USERNAME) REFERENCES USER(USERNAME), PRIMARY KEY(PRODUCTID))";
     // create review table
@@ -319,5 +346,5 @@ const initializeDB=async(db)=>{
     
 }
 
-module.exports={getAllUsers,phase7part7,phase8part8,phase9part9,phase10part10,phase6part6,phase5part5,phase4part4,phase3part3,getCatXandY,getMostExpensiveItemsInCategory,CreateProduct,addReview,getAllProducts,getAllReviews,getProductForCategory,getAllReviews,initializeDB,checkforDB}
+module.exports={getFavourites,updateFavourites,getAllUsers,phase7part7,phase8part8,phase9part9,phase10part10,phase6part6,phase5part5,phase4part4,phase3part3,getCatXandY,getMostExpensiveItemsInCategory,CreateProduct,addReview,getAllProducts,getAllReviews,getProductForCategory,getAllReviews,initializeDB,checkforDB}
 
