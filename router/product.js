@@ -101,6 +101,7 @@ productRouter.get('/category/p3t3',async(req,res)=>{
         res.render('pages/404')
     }
 })
+
 productRouter.get('/category/p4t4',async(req,res)=>{
     try {
         let query=req.query
@@ -111,6 +112,7 @@ productRouter.get('/category/p4t4',async(req,res)=>{
         res.render('pages/404')
     }
 })
+
 productRouter.get('/category/p5t5',async(req,res)=>{
     try {
         let query=req.query
@@ -135,6 +137,7 @@ productRouter.get('/category/p5t5',async(req,res)=>{
                 }
             }
         }
+        console.log(final)
         res.render('pages/p5t5',{users:final,inputuser:query})
     } catch (error) {
         res.render('pages/404')
@@ -149,6 +152,7 @@ productRouter.get('/category/p6t6',async(req,res)=>{
         res.render('pages/404')
     }
 })
+
 productRouter.get('/category/p7t7',async(req,res)=>{
     try {
         var result=await phase7part7(req.db);
@@ -157,6 +161,7 @@ productRouter.get('/category/p7t7',async(req,res)=>{
         res.render('pages/404')
     }
 })
+
 productRouter.get('/category/p8t8',async(req,res)=>{
     try {
         var result=await phase8part8(req.db);
