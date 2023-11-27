@@ -18,6 +18,7 @@ Contributions: Setting up DB and respective requirements, Establishing queries r
 
 Phase 1 Video: https://youtu.be/sU4zqiFr5aU
 Phase 2 Video: https://youtu.be/209RHxeWZ3o?si=2lIo3V5YtfE_rUMP
+Phase 3 Video: https://youtu.be/xtnYFJXJTYo
 
 Tech Stack Used: HTML, CSS, Javascript, Node.js, MYSQL.
 Development System: Ubuntu Linux.
