@@ -163,7 +163,7 @@ const productData=[
          "2023-11-25"
     ],
     [
-        "Jatin",
+        "JATIN",
         "Dell Laptop",
         "This laptop is very fast",
         "Laptop,Electronics",

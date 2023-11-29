@@ -29,7 +29,7 @@ const getProductForCategory=(db,category)=>{
 const CreateProduct=(con,data)=>{
     let date=new Date();
     date=`${date.getFullYear()}/${date.getMonth()+1}/${date.getDate()}`;
-    
+    data.USERNAME=data.USERNAME.toUpperCase()
     // before adding check if avlues are not more than 3
     const query1="Select COUNT(PRODUCTID) from PRODUCT WHERE USERNAME=? AND DATE=?"
     const query2="INSERT INTO PRODUCT (TITLE,DESCRIPTION,CATEGORY,PRICE,USERNAME,DATE) VALUES (?,?,?,?,?,?)";
@@ -85,7 +85,9 @@ const getCatXandY=(db,cat1,cat2)=>{
 }
 
 const phase3part3=(db,user)=>{
+
     const query="SELECT DISTINCT P.PRODUCTID,P.TITLE,P.DESCRIPTION,P.PRICE,MIN(R.REVIEW_TYPE) AS REVIEW_TYPE FROM PRODUCT P JOIN REVIEW R ON P.PRODUCTID = R.PRODUCTID WHERE P.USERNAME = ? AND (R.REVIEW_TYPE = ? OR R.REVIEW_TYPE = ?) GROUP BY P.PRODUCTID, P.TITLE, P.DESCRIPTION, P.PRICE";
+    
     return new Promise((resolve,reject)=>db.query(query,[user,'Excellent','Good'],(err,result)=>{
         if(err){
             reject(err.sqlMessage)

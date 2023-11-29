@@ -31,6 +31,7 @@ productRouter.post('/new',async(req,res)=>{
     try {
         let data=req.body;
         let result=await CreateProduct(req.db,data);
+        console.log(result);
         if(result==3){
             res.send("3")
         }else
